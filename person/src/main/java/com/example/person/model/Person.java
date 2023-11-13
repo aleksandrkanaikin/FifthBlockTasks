@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Person {
     @Id
@@ -22,41 +24,11 @@ public class Person {
 
 
 
-    public Person() {
-    }
+//    public Person() {
+//    }
 
     public Person(@NonNull String name, @NonNull String location) {
         this.name = name;
-        this.location = location;
-    }
-
-    public Person(int id, @NonNull String name, @NonNull String location) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
         this.location = location;
     }
 }

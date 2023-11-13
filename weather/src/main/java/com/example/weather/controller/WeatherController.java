@@ -1,5 +1,7 @@
 package com.example.weather.controller;
 
+import com.example.weather.model.Weather;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +13,25 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/weather")
 public class WeatherController {
 
-    final String key = "449ace19e46aef7f8c5afef237f3c996";
-    @GetMapping("/{lat}/{lon}")
-    public ResponseEntity<String> getWeather(@PathVariable Double lat, @PathVariable Double lon){
+    @Value("${openweathermap.api.key}")
+    private String key;
+    @GetMapping("/lat={lat}&lon={lon}")
+    public ResponseEntity<Weather> getWeather(@PathVariable Double lat, @PathVariable Double lon){
         RestTemplate restTemplate = new RestTemplate();
         String uri = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + key;
-        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        return response;
+        ResponseEntity<Weather> response = restTemplate.getForEntity(uri, Weather.class);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            // Вернуть объект Weather в случае успешного запроса
+            Weather weather = response.getBody();
+
+            // Преобразовать температуру в градусы Цельсия
+            if (weather != null && weather.getMain() != null) {
+                weather.getMain().convertToCelsius();
+            }
+
+            return ResponseEntity.ok(weather);
+        } else {
+            return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+        }
     }
 }

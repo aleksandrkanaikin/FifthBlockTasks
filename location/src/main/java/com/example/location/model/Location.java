@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Location {
     @Id
@@ -21,50 +23,9 @@ public class Location {
     @NonNull
     private Double lon;
 
-    public Location(){
-    }
     public Location(@NonNull String name, @NonNull Double lat, @NonNull Double lon){
         this.name = name;
         this.lat = lat;
-        this.lon = lon;
-    }
-
-    public Location(int id, @NonNull String name, @NonNull Double lat, @NonNull Double lon) {
-        this.id = id;
-        this.name = name;
-        this.lat = lat;
-        this.lon = lon;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
         this.lon = lon;
     }
 }
