@@ -68,3 +68,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/User/Id
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 50 more
+2023-11-14 21:43:12 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "LOCATION" не найдена
+Table "LOCATION" not found; SQL statement:
+DROP TABLE LOCATION [42102-214]

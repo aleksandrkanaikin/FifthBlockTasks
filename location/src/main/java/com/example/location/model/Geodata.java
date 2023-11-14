@@ -9,23 +9,17 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Location {
+public class Geodata {
     @Id
     @GeneratedValue
-    private int id;
+    int id;
+    @NonNull
+    private double lon;
+    @NonNull
+    private double lat;
     @NonNull
     private String name;
-    @NonNull
-    private Double lat;
-    @NonNull
-    private Double lon;
-
-    public Location(@NonNull String name, @NonNull Double lat, @NonNull Double lon){
-        this.name = name;
-        this.lat = lat;
-        this.lon = lon;
-    }
 }
