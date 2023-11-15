@@ -7,13 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="weather" />
-        <module name="person" />
         <module name="location" />
+        <module name="person" />
+        <module name="eureka" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eureka" options="-parameters" />
       <module name="location" options="-parameters" />
       <module name="person" options="-parameters" />
       <module name="weather" options="-parameters" />
