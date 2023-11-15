@@ -11,10 +11,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/location")
-public class WeatherController {
+public class LocationController {
     @Autowired
     private GeodataRepository repository;
-    private RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/weather")
     public Weather redirectRequestWeather(@RequestParam String location) {

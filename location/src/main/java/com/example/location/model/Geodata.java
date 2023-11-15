@@ -21,5 +21,5 @@ public class Geodata {
     @NonNull
     private double lat;
     @NonNull
-    private String name;
+        private String name;
 }
