@@ -19,7 +19,6 @@ public class WeatherController {
     @GetMapping("/lat={lat}&lon={lon}")
     public ResponseEntity<Main> getWeather(@PathVariable Double lat, @PathVariable Double lon) {
         Main weather = weatherService.getWeather(lat, lon);
-
         if (weather != null) {
             return ResponseEntity.ok(weather);
         } else {

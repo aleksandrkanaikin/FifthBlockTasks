@@ -23,10 +23,6 @@ public class Person {
     private String location;
 
 
-
-//    public Person() {
-//    }
-
     public Person(@NonNull String name, @NonNull String location) {
         this.name = name;
         this.location = location;

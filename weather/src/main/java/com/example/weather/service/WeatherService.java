@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 @CacheConfig(cacheNames = "weatherCache", cacheManager = "cacheManager")
 public class WeatherService {
     @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate outsideRestTemplate;
+    RestTemplate restTemplate = new RestTemplate();
     @Value("${appid}")
     private String appId;
     @Value("${url.weather}")

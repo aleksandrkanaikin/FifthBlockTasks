@@ -4,6 +4,7 @@ import com.example.person.model.Person;
 import com.example.person.model.Weather;
 import com.example.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,16 @@ public class PersonController {
     private PersonRepository repository;
     @Autowired
     RestTemplate restTemplate;
+    @Value("${location.url}")
+    String locationurl;
 
     @GetMapping("{id}/weather")
     public ResponseEntity<Weather> getWeather(@PathVariable int id) {
         if (repository.existsById(id)) {
             String location = repository.findById(id).get().getLocation();
-            Weather weather = restTemplate.getForObject("http://localhost:8081/location/weather?location=" + location, Weather.class);
+            System.out.println(location);
+            String url = String.format("http://%s/location/weather?location=%s", locationurl, location);
+            Weather weather = restTemplate.getForObject(url, Weather.class);
             return new ResponseEntity(weather, HttpStatus.OK);
         }
         return new ResponseEntity(null, HttpStatus.NOT_FOUND);
@@ -44,5 +49,10 @@ public class PersonController {
         return repository.findById(person.getId()).isPresent()
                 ? new ResponseEntity(repository.findById(person.getId()), HttpStatus.BAD_REQUEST)
                 : new ResponseEntity(repository.save(person), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id){
+        repository.deleteById(id);
     }
 }
